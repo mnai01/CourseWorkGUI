@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matlak_Hw4_Main_CSharp", "Matlak_Hw4_Main_CSharp\Matlak_Hw4_Main_CSharp.csproj", "{B9530B70-304B-410F-AD19-AC886F1B414A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9530B70-304B-410F-AD19-AC886F1B414A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9530B70-304B-410F-AD19-AC886F1B414A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9530B70-304B-410F-AD19-AC886F1B414A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9530B70-304B-410F-AD19-AC886F1B414A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CED7CF54-DB42-415D-975F-BCF5E10187EA}
+	EndGlobalSection
+EndGlobal
