@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Matlak_Hw4_Csharp_DLL;
+using System.Runtime.Serialization.Json;
 
 namespace Matlak_Hw4_Main_CSharp
 {
@@ -23,14 +24,18 @@ namespace Matlak_Hw4_Main_CSharp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public CourseWork cw = new CourseWork();
+
         public MainWindow()
         {
             InitializeComponent();
+            courseWorkTB.IsReadOnly = true;
+            courseNameTB.IsReadOnly = true;
+            overallGradeTB.IsReadOnly = true;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OpenCW_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog= new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
             openFileDialog.Filter = "JSON files (*.json) | *.json";
@@ -39,17 +44,56 @@ namespace Matlak_Hw4_Main_CSharp
             openFileDialog.FilterIndex = 1;
 
             // What does this do?
-            //openFileDialog1.RestoreDirectory = true;
-            if(openFileDialog.ShowDialog() == true)
+            // openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == true)
             {
                 courseWorkTB.Text = openFileDialog.FileName;
             }
-            //System.Diagnostics.Process.Start(Directory.GetCurrentDirectory());
-            //courseWorkTB.Text = Directory.GetCurrentDirectory();
+
+            T ReadJsonFile<T>(T obj)
+            {
+                // Console.Write("Enter Json File Name: "); 
+                string fileName = openFileDialog.FileName;
+                FileStream reader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+
+                DataContractJsonSerializer deser;
+                deser = new DataContractJsonSerializer(typeof(T));
+
+                obj = (T)deser.ReadObject(reader);
+
+                reader.Close();
+                return obj;
+            }
+            // System.Diagnostics.Process.Start(Directory.GetCurrentDirectory());
+            // courseWorkTB.Text = Directory.GetCurrentDirectory();
+            cw = (CourseWork)ReadJsonFile(cw);
+            courseNameTB.Text = cw.CourseName;
+            overallGradeTB.Text = Convert.ToString(cw.CalculateGrade());
+            foreach(var i in cw.Categories)
+            {
+                categoryLV.Items.Add(i);
+            }
+            foreach (var i in cw.Assignment)
+            {
+                assignmentLV.Items.Add(i);
+            }
+            foreach (var i in cw.Submission)
+            {
+                submissionLV.Items.Add(i);
+            }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CourseWorkTB_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void FindSubBTN_Click(object sender, RoutedEventArgs e)
+        {
+            cw.FindSubmission(targetAsgNameTB.Text);
+            assignmentNameTB.Text = cw.FindSubmission(targetAsgNameTB.Text).AssignmentName;
+            categoriesNameTB.Text = cw.FindSubmission(targetAsgNameTB.Text).CategoryName;
+            gradeTB.Text = cw.FindSubmission(targetAsgNameTB.Text).Grade.ToString();
 
         }
     }
