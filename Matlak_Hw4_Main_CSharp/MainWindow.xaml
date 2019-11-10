@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Matlak_Hw4_Main_CSharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="460.667" Width="800">
+        Title="MainWindow" Height="460.667" Width="951">
     <Grid>
         <Button x:Name="openCW" Content="Open Course Work JSON File" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="196" Click="OpenCW_Click"/>
         <Label Content="Course Work Filename" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="113" FontSize="10"/>
-        <TextBox x:Name="courseWorkTB" Height="23" Margin="128,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" IsReadOnly="True" TextChanged="CourseWorkTB_TextChanged" IsManipulationEnabled="True" HorizontalAlignment="Left"/>
+        <TextBox x:Name="courseWorkTB" Height="23" Margin="128,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" IsReadOnly="True" IsManipulationEnabled="True"/>
         <Label Content="Course Name" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <TextBox x:Name="courseNameTB" HorizontalAlignment="Left" Height="23" Margin="85,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="622" IsReadOnly="True"/>
+        <TextBox x:Name="courseNameTB" Height="23" Margin="85,76,10,0" TextWrapping="Wrap" VerticalAlignment="Top" IsReadOnly="True"/>
         <Label x:Name="overallgradeLB" Content="Overall Grade" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" FontSize="10"/>
         <TextBox x:Name="overallGradeTB" HorizontalAlignment="Left" Height="23" Margin="85,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsReadOnly="True"/>
         <Label x:Name="categoriesLB" Content="Category" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <ListView x:Name="categoryLV" HorizontalAlignment="Left" Height="140" Margin="10,155,0,0" VerticalAlignment="Top" Width="120">
+        <ListView x:Name="categoryLV" HorizontalAlignment="Left" Height="140" Margin="10,155,0,0" VerticalAlignment="Top" Width="149">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
@@ -23,8 +23,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="assignmentLB" Content="Assignments" HorizontalAlignment="Left" Margin="146,132,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="0.384,0.493"/>
-        <ListView x:Name="assignmentLV" HorizontalAlignment="Left" Height="140" Margin="146,155,0,0" VerticalAlignment="Top" Width="426">
+        <Label x:Name="assignmentLB" Content="Assignments" HorizontalAlignment="Left" Margin="177,132,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="0.384,0.493"/>
+        <ListView x:Name="assignmentLV" HorizontalAlignment="Left" Height="140" Margin="177,155,0,0" VerticalAlignment="Top" Width="473">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
@@ -33,7 +33,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="submissionLV" HorizontalAlignment="Left" Height="140" Margin="588,155,0,0" VerticalAlignment="Top" Width="184">
+        <ListView x:Name="submissionLV" Height="140" Margin="670,155,19,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding CategoryName}" Header="Category Name"/>
@@ -42,16 +42,16 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="submissionLB" Content="Submission" HorizontalAlignment="Left" Margin="588,132,0,0" VerticalAlignment="Top" FontSize="10"/>
+        <Label x:Name="submissionLB" Content="Submission" HorizontalAlignment="Left" Margin="670,132,0,0" VerticalAlignment="Top" FontSize="10"/>
         <Label x:Name="targetAsgNameLB" Content="Target Assignment Name" HorizontalAlignment="Left" Margin="10,315,0,0" VerticalAlignment="Top" FontSize="10"/>
         <TextBox x:Name="targetAsgNameTB" HorizontalAlignment="Left" Height="23" Margin="137,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="findSubBTN" Content="Find Submission" HorizontalAlignment="Left" Margin="137,343,0,0" VerticalAlignment="Top" Width="120" Click="FindSubBTN_Click"/>
         <Label x:Name="assignmentNameLB" Content="Assignment Name" HorizontalAlignment="Left" Margin="292,315,0,0" VerticalAlignment="Top" FontSize="10" RenderTransformOrigin="0.384,0.493"/>
         <Label x:Name="categoriesNameLB" Content="Category Name" HorizontalAlignment="Left" Margin="292,349,0,0" VerticalAlignment="Top" FontSize="10"/>
         <Label x:Name="gradeLB" Content="Grade" HorizontalAlignment="Left" Margin="292,377,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <TextBox x:Name="assignmentNameTB" HorizontalAlignment="Left" Height="23" Margin="409,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
-        <TextBox x:Name="categoriesNameTB" HorizontalAlignment="Left" Height="23" Margin="409,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
-        <TextBox x:Name="gradeTB" HorizontalAlignment="Left" Height="23" Margin="409,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363"/>
+        <TextBox x:Name="assignmentNameTB" Height="23" Margin="409,315,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="categoriesNameTB" Height="23" Margin="409,349,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="gradeTB" Height="23" Margin="409,384,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
