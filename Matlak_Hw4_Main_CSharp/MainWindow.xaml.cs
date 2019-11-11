@@ -1,4 +1,15 @@
-﻿using System;
+﻿//******************************************************
+// File: MainWindows.xaml.cs
+//
+// Purpose: Hold all functionality for events triggered on GUI
+//
+// Written By: Ian Matlak
+// Date: 11/11/2019
+//
+// Compiler: Visual Studio 2019
+// 
+//******************************************************
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,8 +35,10 @@ namespace Matlak_Hw4_Main_CSharp
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Creastes an instance of course work
-        public CourseWork cw = new CourseWork();
+        // When a variable is declared as static, then a single copy of the variable is created and shared among all objects at the class level
+        // Creates statick CourseWork and Statick OpenFileDialog
+        public static CourseWork cw = new CourseWork();
+        public static OpenFileDialog openFileDialog = new OpenFileDialog();
 
         public MainWindow()
         {
@@ -42,7 +55,6 @@ namespace Matlak_Hw4_Main_CSharp
         private void OpenCW_Click(object sender, RoutedEventArgs e)
         {
             // Created a insteance of File Dialog window
-            OpenFileDialog openFileDialog = new OpenFileDialog();
 
             // WHY if i put this here the filter doesnt work?
             // DialogResult result = openFileDialog.ShowDialog();
@@ -101,24 +113,11 @@ namespace Matlak_Hw4_Main_CSharp
                 {
                     submissionLV.Items.Add(i);
                 }
-                // Sets Target textbox to Null
+                // Sets FindSubmission textbox's to Null when new file is loaded in
                 targetAsgNameTB.Text = null;
-            }
-
-            // Generic function to deserialize 
-            T ReadJsonFile<T>(T obj)
-            {
-                // Console.Write("Enter Json File Name: "); 
-                string fileName = openFileDialog.FileName;
-                FileStream reader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-
-                DataContractJsonSerializer deser;
-                deser = new DataContractJsonSerializer(typeof(T));
-
-                obj = (T)deser.ReadObject(reader);
-
-                reader.Close();
-                return obj;
+                assignmentNameTB.Text = null;
+                categoriesNameTB.Text = null;
+                gradeTB.Text = null;
             }
             // System.Diagnostics.Process.Start(Directory.GetCurrentDirectory());
             // courseWorkTB.Text = Directory.GetCurrentDirectory();
@@ -142,6 +141,25 @@ namespace Matlak_Hw4_Main_CSharp
             categoriesNameTB.Text = cw.FindSubmission(targetAsgNameTB.Text).CategoryName;
             gradeTB.Text = cw.FindSubmission(targetAsgNameTB.Text).Grade.ToString();
 
+        }
+        //****************************************************
+        // Method: ReadJsonFile 
+        //
+        // Purpose: Generic function to deserialize json file
+        //****************************************************
+        public static T ReadJsonFile<T>(T obj)
+        {
+            // Console.Write("Enter Json File Name: "); 
+            string fileName = openFileDialog.FileName;
+            FileStream reader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+
+            DataContractJsonSerializer deser;
+            deser = new DataContractJsonSerializer(typeof(T));
+
+            obj = (T)deser.ReadObject(reader);
+
+            reader.Close();
+            return obj;
         }
     }
 }
