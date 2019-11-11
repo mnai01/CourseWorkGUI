@@ -24,57 +24,88 @@ namespace Matlak_Hw4_Main_CSharp
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Creastes an instance of course work
         public CourseWork cw = new CourseWork();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Makes text boxes only readable
             courseWorkTB.IsReadOnly = true;
             courseNameTB.IsReadOnly = true;
             overallGradeTB.IsReadOnly = true;
+            assignmentNameTB.IsReadOnly = true;
+            categoriesNameTB.IsReadOnly = true;
+            gradeTB.IsReadOnly = true;
         }
         private void OpenCW_Click(object sender, RoutedEventArgs e)
         {
+            // Created a insteance of File Dialog window
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             // WHY if i put this here the filter doesnt work?
             // DialogResult result = openFileDialog.ShowDialog();
 
+            // Sets the default path to the dialog window to the current project directory
             openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+
+            // Sets the default filter of the dialog windows 
             openFileDialog.Filter = "JSON files (*.json) | *.json";
 
             // If you have multiple filters is will select the the that is in the given index and the rest will be seen in the dropdown menu
             // Where you will need to manually select them
             openFileDialog.FilterIndex = 1;
 
+            // Creates a dialog result obj based on openFileDialog
             DialogResult result = openFileDialog.ShowDialog();
 
+            // If the dialog box OK is pressed
             if (result == System.Windows.Forms.DialogResult.OK)
             {
+                // Clear the List Views
                 categoryLV.Items.Clear();
                 assignmentLV.Items.Clear();
                 submissionLV.Items.Clear();
 
+                // Set text box to the file name selected
                 courseWorkTB.Text = openFileDialog.FileName;
+
+                // Deserialize JSON file and save results in cw coursework variable
                 cw = (CourseWork)ReadJsonFile(cw);
+
+                // Set text box to the course name from the Json file
                 courseNameTB.Text = cw.CourseName;
+
+                // Sets the text box to the grade that is calculated in the Dll file.
+                // Then converts it to a String
                 overallGradeTB.Text = Convert.ToString(cw.CalculateGrade());
+
+                // Adds iterated through Categories list
+                // Adds the datat to the list view
                 foreach (var i in cw.Categories)
                 {
                     categoryLV.Items.Add(i);
                 }
+
+                // Adds iterated through Assignment list
+                // Adds the datat to the list view
                 foreach (var i in cw.Assignment)
                 {
                     assignmentLV.Items.Add(i);
                 }
+
+                // Adds iterated through Submission list
+                // Adds the datat to the list view
                 foreach (var i in cw.Submission)
                 {
                     submissionLV.Items.Add(i);
                 }
-
+                // Sets Target textbox to Null
                 targetAsgNameTB.Text = null;
             }
 
+            // Generic function to deserialize 
             T ReadJsonFile<T>(T obj)
             {
                 // Console.Write("Enter Json File Name: "); 
@@ -94,10 +125,18 @@ namespace Matlak_Hw4_Main_CSharp
         }
         private void FindSubBTN_Click(object sender, RoutedEventArgs e)
         {
+            // If box is null return and do nothing
             if (String.IsNullOrEmpty(targetAsgNameTB.Text))
             {
                 return;
             }
+            // If FindSubmission return null then return. 
+            // This prevents the code from crashing is a user types in the wrong submission assignment name
+            if (cw.FindSubmission(targetAsgNameTB.Text) == null)
+            {
+                return;
+            }
+            // If submission found is not null then return it and change the text boxes to that submission data
             cw.FindSubmission(targetAsgNameTB.Text);
             assignmentNameTB.Text = cw.FindSubmission(targetAsgNameTB.Text).AssignmentName;
             categoriesNameTB.Text = cw.FindSubmission(targetAsgNameTB.Text).CategoryName;
