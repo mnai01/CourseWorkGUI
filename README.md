@@ -5,4 +5,4 @@ JSON course work data. The main window for the application contains a member
 variable for CourseWork. The member variable will be loaded with data when
 the Open button is pressed.
 
-[GUI](images/GUI.JPG)
+![GUI](images/GUI.JPG)
